@@ -9,5 +9,6 @@
 	<context:property-placeholder file-encoding="utf-8"
 		location="classpath:kr/or/ddit/properties/*.properties"/>
 	<import resource="./dataSource-context.xml" />
+	<import resource="./application-context.xml" />
 	
 </beans>

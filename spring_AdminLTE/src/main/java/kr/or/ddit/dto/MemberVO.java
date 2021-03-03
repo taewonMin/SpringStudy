@@ -11,9 +11,18 @@ public class MemberVO {
 	private Date regdate;	 	// 등록일
 	private String picture; 	// 사진 파일경로/파일명
 	private String authority;	// 권한
-	private String enabled;		// 사용여부
+	private int enabled;		// 사용여부
 	
 	
+	public MemberVO() {}
+	public MemberVO(String id, String pwd, String name, String phone, String email) {
+		super();
+		this.id = id;
+		this.pwd = pwd;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+	}
 	
 	public String getName() {
 		return name;
@@ -63,10 +72,10 @@ public class MemberVO {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-	public String getEnabled() {
+	public int getEnabled() {
 		return enabled;
 	}
-	public void setEnabled(String enabled) {
+	public void setEnabled(int enabled) {
 		this.enabled = enabled;
 	}
 	
