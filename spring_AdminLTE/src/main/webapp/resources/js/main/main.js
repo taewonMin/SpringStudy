@@ -1,7 +1,7 @@
-function subMenu(mcode){
+function subMenu(mcode,contextPath){
 	if(mcode!="M000000"){
 		// $.getJSON(data, url, successFunc()){}
-		$.getJSON("/common/subMenu.do?mCode="+mcode,function(data){
+		$.getJSON(contextPath+"/common/subMenu.do?mCode="+mcode,function(data){
 			printData(data,$(".subMenuList"),$("#subMenu-list-template"),'.subMenu');
 		});
 	}else{
