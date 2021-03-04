@@ -24,6 +24,8 @@
 		<org.mybatis-version>3.5.3</org.mybatis-version>
 		<org.mybatis.spring-version>2.0.3</org.mybatis.spring-version>
 		
+		<opensymphony.sitemesh-version>2.4.2</opensymphony.sitemesh-version>
+		
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
@@ -83,6 +85,12 @@
 		    <version>${org.mybatis.spring-version}</version>
 		</dependency>
 				
+		<!-- sitemesh -->
+		<dependency>
+		    <groupId>opensymphony</groupId>
+		    <artifactId>sitemesh</artifactId>
+		    <version>${opensymphony.sitemesh-version}</version>
+		</dependency>
 				
 		<!-- AspectJ -->
 		<dependency>
