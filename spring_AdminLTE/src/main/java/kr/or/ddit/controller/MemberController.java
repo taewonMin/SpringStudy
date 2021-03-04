@@ -1,12 +1,16 @@
 package kr.or.ddit.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import kr.or.ddit.command.SearchCriteria;
+import kr.or.ddit.dto.MemberVO;
 import kr.or.ddit.service.MemberService;
 
 @Controller
@@ -100,4 +106,48 @@ public class MemberController {
 		 
 		 return fileName; 
 	 }
+	 
+	 @RequestMapping(value="/getPicture",produces="text/plain;charset=utf-8")
+	 @ResponseBody
+	 public ResponseEntity<byte[]> getPicture(String picture) throws Exception {
+		 InputStream in = null;
+		 ResponseEntity<byte[]> entity = null;
+		 String imgPath = this.picturePath;
+		 try {
+			 
+			 // in = new FileInputStream(imgPath+File.separator+picture);
+			 in = new FileInputStream(new File(imgPath, picture));
+			 
+			 entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), HttpStatus.CREATED);
+		 } catch(IOException e) {
+			 e.printStackTrace();
+			 entity = new ResponseEntity<byte[]>(HttpStatus.INTERNAL_SERVER_ERROR);
+		 } finally {
+			 in.close();
+		 }
+		 return entity;
+	 }
+	 
+	 @RequestMapping("/idCheck")
+	 @ResponseBody
+	 public ResponseEntity<String> idCheck(String id) throws Exception {
+		 ResponseEntity<String> entity = null;
+		 
+		 try {
+			 MemberVO member = memberService.getMember(id);
+			 
+			 if(member!=null) {
+				 entity = new ResponseEntity<String>("duplicated",HttpStatus.OK);
+			 }else {
+				 entity = new ResponseEntity<String>("",HttpStatus.OK);
+			 }
+		 } catch(SQLException e) {
+			 entity = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		 }
+		 
+		 return entity;
+		 
+	 }
+	 
+	 
 }
