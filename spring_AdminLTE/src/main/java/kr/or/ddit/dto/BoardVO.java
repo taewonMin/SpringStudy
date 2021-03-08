@@ -12,8 +12,6 @@ public class BoardVO {
 	private Date regDate;     // 등록날짜
 	private Date updatedate;  // 수정날짜
 	
-	List<AttachVO> attachList; //첨부파일
-	
 	private int replycnt; // 댓글 개수
 	
 	
@@ -28,21 +26,6 @@ public class BoardVO {
 		this.regDate = regDate;
 		this.updatedate = updatedate;
 	}
-	
-	public BoardVO(int bno, String title, String writer, String content, int viewcnt, Date regDate, Date updatedate,
-			List<AttachVO> attachList, int replycnt) {
-		super();
-		this.bno = bno;
-		this.title = title;
-		this.writer = writer;
-		this.content = content;
-		this.viewcnt = viewcnt;
-		this.regDate = regDate;
-		this.updatedate = updatedate;
-		this.attachList = attachList;
-		this.replycnt = replycnt;
-	}
-	
 	
 	public int getReplycnt() {
 		return replycnt;
@@ -92,17 +75,10 @@ public class BoardVO {
 	public void setUpdatedate(Date updatedate) {
 		this.updatedate = updatedate;
 	}
-	public List<AttachVO> getAttachList() {
-		return attachList;
-	}
-	public void setAttachList(List<AttachVO> attachList) {
-		this.attachList = attachList;
-	}
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", content=" + content + ", viewcnt="
-				+ viewcnt + ", regDate=" + regDate + ", updatedate=" + updatedate + ", attachList=" + attachList
-				+ ", replycnt=" + replycnt + "]";
+				+ viewcnt + ", regDate=" + regDate + ", updatedate=" + updatedate + ", replycnt=" + replycnt + "]";
 	}
 	
 }

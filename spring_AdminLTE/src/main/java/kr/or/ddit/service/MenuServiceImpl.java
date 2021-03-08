@@ -3,20 +3,12 @@ package kr.or.ddit.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-
 import kr.or.ddit.dao.MenuDAO;
 import kr.or.ddit.dto.MenuVO;
 
 
 public class MenuServiceImpl implements MenuService {
 
-	private SqlSessionFactory sqlSessionFactory;
-	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
-		this.sqlSessionFactory = sqlSessionFactory;
-	}
-	
 	private MenuDAO menuDAO;
 	public void setMenuDAO(MenuDAO menuDAO) {
 		this.menuDAO = menuDAO;

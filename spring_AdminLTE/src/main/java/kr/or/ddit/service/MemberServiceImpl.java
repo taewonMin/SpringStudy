@@ -25,6 +25,7 @@ public class MemberServiceImpl implements MemberService {
 	public void login(String id, String pwd, HttpSession session)
 			throws SQLException, NotFoundIDException, InvalidPasswordException {
 		MemberVO member = memberDAO.selectMemberById(id);
+		
 		if(member==null)
 			throw new NotFoundIDException();
 		if(!pwd.equals(member.getPwd()))

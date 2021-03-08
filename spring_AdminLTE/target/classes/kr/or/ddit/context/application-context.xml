@@ -26,6 +26,9 @@
 	<bean id="menuDAO" class="kr.or.ddit.dao.MenuDAOImpl"
 		  p:sqlSession-ref="sqlSession"
 		  />
+	<bean id="boardDAO" class="kr.or.ddit.dao.BoardDAOImpl"
+		  p:sqlSession-ref="sqlSession"
+		  />
 	
 	<!-- service -->
 	<bean id="memberService" class="kr.or.ddit.service.MemberServiceImpl"
@@ -33,5 +36,8 @@
 		  />
 	<bean id="menuService" class="kr.or.ddit.service.MenuServiceImpl"
 		  p:menuDAO-ref="menuDAO"
+		  />
+	<bean id="boardService" class="kr.or.ddit.service.BoardServiceImpl"
+		  p:boardDAO-ref="boardDAO"
 		  />
 </beans>
