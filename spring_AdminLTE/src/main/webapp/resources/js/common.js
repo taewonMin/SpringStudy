@@ -147,7 +147,7 @@ function getCookie(cookie_name) {
 	}
 }
 
-function summernote_start(content){
+function summernote_start(content,contextPath){
 	$(content).summernote({
 		placeholder: '여기에 내용을 적으세요.',
 		height:250,
@@ -163,13 +163,13 @@ function summernote_start(content){
 				}
 				//file sending
 				for(var i = files.length-1; i>=0; i--){
-					sendImg(files[i], this, '/common/summernote/uploadImg.do');
+					sendImg(files[i], this, contextPath+'/common/summernote/uploadImg.do');
 				}
 			},
 			onMediaDelete: function(target){
 				var answer = confirm("정말 이미지를 삭제하시겠습니다.");
 				if(answer){
-					deleteImg(target[0].src, '/common/summernote/deleteImg.do');
+					deleteImg(target[0].src, contextPath+'/common/summernote/deleteImg.do');
 				}
 			}
 		}
@@ -208,6 +208,7 @@ function deleteImg(src,deleteURL){
 	$.ajax({
 		url:deleteURL,
 		data:JSON.stringify(fileData),
+		contentType:"application/json",
 		type:"post",
 		success:function(res){
 			console.log(res);

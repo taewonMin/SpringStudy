@@ -47,17 +47,19 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/regist",method=RequestMethod.POST)
-	public void regist(BoardVO board, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String regist(BoardVO board, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		service.regist(board);
+		String url="board/regist_success";
 		
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script>");
-		out.println("window.opener.location.reload(true);window.close();");
-		out.println("</script>");
+		try {
+			service.regist(board);
+		}catch(SQLException e) {
+			e.printStackTrace();
+			url="board/regist_fail";
+			throw e;
+		}
 		
-		out.close();
+		return url;
 	}
 	
 	@RequestMapping("/detail")
