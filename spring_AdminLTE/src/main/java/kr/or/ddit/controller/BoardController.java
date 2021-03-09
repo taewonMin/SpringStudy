@@ -106,7 +106,7 @@ public class BoardController {
 		out.close();
 	}
 	
-	@RequestMapping(value="/remove",method=RequestMethod.POST)
+	@RequestMapping(value="/remove",method=RequestMethod.GET)
 	public void remove(int bno,HttpServletResponse response) throws Exception {
 		
 		service.remove(bno);
