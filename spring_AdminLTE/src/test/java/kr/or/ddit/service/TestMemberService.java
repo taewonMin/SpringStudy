@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.or.ddit.command.SearchCriteria;
+import kr.or.ddit.dao.MockMemberDAO;
 import kr.or.ddit.dto.MemberVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -29,6 +29,9 @@
 	<bean id="boardDAO" class="kr.or.ddit.dao.BoardDAOImpl"
 		  p:sqlSession-ref="sqlSession"
 		  />
+	<bean id="replyDAO" class="kr.or.ddit.dao.ReplyDAOImpl"
+		  p:sqlSession-ref="sqlSession"
+		  />
 	
 	<!-- service -->
 	<bean id="memberService" class="kr.or.ddit.service.MemberServiceImpl"
@@ -39,5 +42,9 @@
 		  />
 	<bean id="boardService" class="kr.or.ddit.service.BoardServiceImpl"
 		  p:boardDAO-ref="boardDAO"
+		  p:replyDAO-ref="replyDAO"
+		  />
+	<bean id="replyService" class="kr.or.ddit.service.ReplyServiceImpl"
+		  p:replyDAO-ref="replyDAO"
 		  />
 </beans>

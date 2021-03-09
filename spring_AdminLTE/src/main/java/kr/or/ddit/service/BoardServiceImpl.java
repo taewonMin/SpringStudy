@@ -8,6 +8,7 @@ import java.util.Map;
 import kr.or.ddit.command.PageMaker;
 import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dao.BoardDAO;
+import kr.or.ddit.dao.ReplyDAO;
 import kr.or.ddit.dto.BoardVO;
 
 public class BoardServiceImpl implements BoardService {
@@ -15,6 +16,11 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO boardDAO;
 	public void setBoardDAO(BoardDAO boardDAO) {
 		this.boardDAO = boardDAO;
+	}
+	
+	private ReplyDAO replyDAO;
+	public void setReplyDAO(ReplyDAO replyDAO) {
+		this.replyDAO = replyDAO;
 	}
 	
 	@Override
@@ -25,10 +31,10 @@ public class BoardServiceImpl implements BoardService {
 		List<BoardVO> boardList = boardDAO.selectBoardCriteria(cri);
 
 		// reply count 입력
-//		for (BoardVO board : boardList) {
-//			int replycnt = replyDAO.countReply(session, board.getBno());
-//			board.setReplycnt(replycnt);
-//		}
+		for (BoardVO board : boardList) {
+			int replycnt = replyDAO.countReply(board.getBno());
+			board.setReplycnt(replycnt);
+		}
 
 		// 전체 board 개수
 		int totalCount = boardDAO.selectBoardCriteriaTotalCount(cri);

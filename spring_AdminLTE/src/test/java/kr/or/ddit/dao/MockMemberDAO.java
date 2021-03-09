@@ -1,4 +1,4 @@
-package kr.or.ddit.service;
+package kr.or.ddit.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
