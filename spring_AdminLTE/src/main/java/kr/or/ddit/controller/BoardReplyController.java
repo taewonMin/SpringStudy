@@ -66,10 +66,10 @@ public class BoardReplyController {
 			PageMaker pageMaker = (PageMaker) dataMap.get("pageMaker");
 			int realEndPage = pageMaker.getRealEndPage();
 			
-			entity = new ResponseEntity<String>(realEndPage+"",HttpStatus.OK);
+			entity = new ResponseEntity<String>("SUCCESS,"+realEndPage,HttpStatus.OK);
 		} catch(SQLException e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+			entity = new ResponseEntity<String>("FAIL", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		return entity;
@@ -97,8 +97,25 @@ public class BoardReplyController {
 	public ResponseEntity<String> remove (@PathVariable("rno") int rno,
 										  @PathVariable("bno") int bno,
 										  @PathVariable("page") int page) throws Exception {
+		ResponseEntity<String> entity = null;
 		
+		try {
+			service.removeReply(rno);
+			
+			SearchCriteria cri = new SearchCriteria();
+			
+			Map<String, Object> dataMap = service.getReplyList(bno, cri);
+			PageMaker pageMaker = (PageMaker) dataMap.get("pageMaker");
+			
+			int realEndPage = pageMaker.getRealEndPage();
+			if(page>realEndPage) page=realEndPage;
+			
+			entity = new ResponseEntity<String>(""+page,HttpStatus.OK);
+		} catch(SQLException e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		
-		return null;
+		return entity;
 	}
 }

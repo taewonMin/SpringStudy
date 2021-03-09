@@ -38,7 +38,7 @@ function searchList_go(page){
 	for(var key of pageParamsKeys){
 		$.cookie("reply_"+key,pageParams[key],{path:"/"});
 	}
-	getPage("/board/replies/list.do?bno=${board.bno}&page="+replyPage);
+	getPage("<%=request.getContextPath()%>/replies/${board.bno}/"+replyPage);
 	
 	return false;
 	
@@ -60,17 +60,17 @@ function replyRegist_go(){
 	}
 	
 	$.ajax({
-		url:"/board/replies/regist.do",
+		url:"<%=request.getContextPath()%>/replies",
 		type:"post",
 		data: JSON.stringify(data),
+		contentType:"application/json",
 		success: function (data){
 			var result=data.split(",");
 			if(result[0]=="SUCCESS"){
 				alert("댓글이 등록되었습니다.")
 				replyPage=result[1];	// 페이지 이동
 				$.cookie('reply_page',result[1],{path:"/"});	// 상태유지
-				getPage("/board/replies/list.do?bno=${board.bno}&page="+result[1]);	// 리스트 출력
-				$('#newReplyWriter').val("");
+				getPage("<%=request.getContextPath()%>/replies/${board.bno}/"+result[1]);	// 리스트 출력
 				$('#newReplyText').val("");
 			}else{
 				alert("댓글이 등록을 실패했습니다.")
@@ -99,16 +99,23 @@ window.onload=function(){
 	});
 	
 	$('#replyModBtn').on('click',function(event){
-		var form = $('#modifyModal form[role="frm"]');
+		var rno=$('#modifyModal input#rno').val();
+		var replytext=$('#modifyModal input#replytext').val();
+// 		var form = $('#modifyModal form[role="frm"]');
 	// 	alert(form.serialize());
 		
 		$.ajax({
-			url: "/board/replies/modify.do",
-			type:"post",
-			data:form.serialize(),
+			url: "<%=request.getContextPath()%>/replies/"+rno,
+			type:"put",
+			headers:{
+				"Content-Type":"application/json",
+				"X-HTTP-Method-Override":"PUT"
+			},
+			data:JSON.stringify({replytext:replytext}),
+			contentType:"application/json",
 			success:function(result){
 				alert("수정되었습니다.");
-				getPage("/board/replies/list.do?bno=${board.bno}&page="+replyPage);
+				getPage("<%=request.getContextPath()%>/replies/${board.bno}/"+replyPage);
 			},
 			error:function(error){
 				alert("수정 실패했습니다.");
@@ -126,13 +133,17 @@ window.onload=function(){
 	// 	alert(rno);
 	
 		$.ajax({
-			url:"/board/replies/remove.do",
-			type:"post",
-			data:JSON.stringify({rno:rno,bno:${board.bno}}),
+			url:"<%=request.getContextPath()%>/replies/${board.bno}/"+rno+"/"+replyPage,
+			type:"delete",
+			headers:{
+				"Content-Type":"application/json",
+				"X-HTTP-Override":"delete"
+			},
+			dataType:'text',
 			success:function(page){
 				alert("삭제되었습니다.");
 				$.cookie('reply_page',page,{path:"/"});
-				getPage("/board/replies/list.do?bno=${board.bno}&page="+page);
+				getPage("<%=request.getContextPath()%>/replies/${board.bno}/"+page);
 			},
 			error:function(error){
 				alert("삭제 실패했습니다.");

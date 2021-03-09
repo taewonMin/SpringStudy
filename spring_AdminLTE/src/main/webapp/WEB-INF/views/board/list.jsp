@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
 <style type="text/css">
 	table th,td{
 		text-align: center;
@@ -41,20 +40,20 @@
 					<div class="input-group row">	
 						 <!-- sort num -->
 					  	<select class="form-control col-md-3" name="perPageNum" id="perPageNum" onchange="searchList_go(1);">
-					  		<option value="10" ${cri.perPageNum == 10 ? 'selected':''}>정렬개수</option>
-					  		<option value="20" ${cri.perPageNum == 20 ? 'selected':''}>20개씩</option>
-					  		<option value="30" ${cri.perPageNum == 30 ? 'selected':''}>30개씩</option>
-					  		<option value="50" ${cri.perPageNum == 50 ? 'selected':''}>50개씩</option>
+					  		<option value="10" ${pageMaker.cri.perPageNum == 10 ? 'selected':''}>정렬개수</option>
+					  		<option value="20" ${pageMaker.cri.perPageNum == 20 ? 'selected':''}>20개씩</option>
+					  		<option value="30" ${pageMaker.cri.perPageNum == 30 ? 'selected':''}>30개씩</option>
+					  		<option value="50" ${pageMaker.cri.perPageNum == 50 ? 'selected':''}>50개씩</option>
 					  	</select>					
 						<select class="form-control col-md-3" name="searchType" id="searchType">
-							<option value="tcw" ${cri.searchType eq 'tcw' ? 'selected':''}>전 체</option>
-							<option value="t" ${cri.searchType eq 't' ? 'selected':''}>제 목</option>
-							<option value="w" ${cri.searchType eq 'w' ? 'selected':''}>작성자</option>
-							<option value="c" ${cri.searchType eq 'c' ? 'selected':''}>내 용</option>
-							<option value="tc" ${cri.searchType eq 'tc' ? 'selected':''}>제목+내용</option>
-							<option value="cw" ${cri.searchType eq 'cw' ? 'selected':''}>작성자+내용</option>
+							<option value="tcw" ${pageMaker.cri.searchType eq 'tcw' ? 'selected':''}>전 체</option>
+							<option value="t" ${pageMaker.cri.searchType eq 't' ? 'selected':''}>제 목</option>
+							<option value="w" ${pageMaker.cri.searchType eq 'w' ? 'selected':''}>작성자</option>
+							<option value="c" ${pageMaker.cri.searchType eq 'c' ? 'selected':''}>내 용</option>
+							<option value="tc" ${pageMaker.cri.searchType eq 'tc' ? 'selected':''}>제목+내용</option>
+							<option value="cw" ${pageMaker.cri.searchType eq 'cw' ? 'selected':''}>작성자+내용</option>
 						</select>					
-						<input  class="form-control col-md-5" type="text" name="keyword" placeholder="검색어를 입력하세요." value="${cri.keyword }"/>
+						<input  class="form-control col-md-5" type="text" name="keyword" placeholder="검색어를 입력하세요." value="${pageMaker.cri.keyword }"/>
 						<span class="input-group-append col-me-1">
 							<button class="btn btn-primary" type="button" onclick="searchList_go(1);" 
 							data-card-widget="search">
