@@ -18,6 +18,7 @@
 		<typeAlias type="kr.or.ddit.dto.MemberVO" alias="member" />
 		<typeAlias type="kr.or.ddit.dto.NoticeVO" alias="notice" />
 		<typeAlias type="kr.or.ddit.dto.NoticeAttachVO" alias="noticeAttach" />
+		<typeAlias type="kr.or.ddit.dto.PdsVO" alias="pds" />
 		
 	</typeAliases>
 	
