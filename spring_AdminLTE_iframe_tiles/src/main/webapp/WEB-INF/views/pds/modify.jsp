@@ -27,7 +27,7 @@
 							<div class="form-group">
 								<label for="title">제 목</label> 
 								<input type="text" id="title" value="${pds.title }"
-									name='title' class="form-control" placeholder="제목을 쓰세요">
+									name="title" class="form-control" placeholder="제목을 쓰세요">
 							</div>
 							<div class="form-group">
 								<label for="content">내 용</label>
@@ -46,11 +46,11 @@
 											<c:forEach items="${pds.attachList }" var="attach">
 											<li class="attach-item">
 												<div class="mailbox-attachment-info">
-													<a class="mailbox-attachment-name" name="attachedFile"
+													<a class="mailbox-attachment-name d-flex justify-content-between" name="attachedFile"
 														attach-fileName="${attach.fileName }" attach-no="${attach.ano }"
 														href="getFile.do?pno=${pds.pno }&ano=${attach.ano }" >
-														<i class="fas fa-paperclip"></i>
-														${attach.fileName }&nbsp;&nbsp;
+														<span><i class="fas fa-paperclip"></i>
+														${attach.fileName }&nbsp;&nbsp;</span>
 														<button type="button" style="border:0;outline:0;" class="badge bg-red">X</button>
 													</a>
 												</div>

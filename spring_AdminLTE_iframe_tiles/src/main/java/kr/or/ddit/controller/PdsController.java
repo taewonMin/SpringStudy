@@ -200,6 +200,7 @@ public class PdsController {
 		out.println("<script>");
 		out.println("alert('수정되었습니다.');");
 		out.println("location.href='detail?pno="+pds.getPno()+"&from=modify';");
+		out.println("window.opener.location.reload(true);");
 		out.println("</script>");
 		
 		out.close();
