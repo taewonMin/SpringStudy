@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
     
     
@@ -15,33 +17,45 @@
 					<div class="card-body">
 						<form enctype="multipart/form-data" role="form" method="post" action="modify.do" name="modifyForm">
 							
-							<input type='hidden' name="pno" value="" />
+							<input type='hidden' name="pno" value="${pds.pno }" />
 						
 							<div class="form-group">
 								<label for="writer">작성자</label> 
 								<input type="text" id="writer" readonly
-									name="writer" class="form-control" value="">
+									name="writer" class="form-control" value="${pds.writer }">
 							</div>
 							<div class="form-group">
 								<label for="title">제 목</label> 
-								<input type="text" id="title" value=""
+								<input type="text" id="title" value="${pds.title }"
 									name='title' class="form-control" placeholder="제목을 쓰세요">
 							</div>
 							<div class="form-group">
 								<label for="content">내 용</label>
-								<textarea id="content" name="content"></textarea>
+								<textarea id="content" name="content">${fn:escapeXml(pds.content) }</textarea>
 							</div>
 							
 							<div class="form-group">								
 								<div class="card card-outline card-success">
 									<div class="card-header">
 										<h3 style="display:inline;line-height:40px;">첨부파일 : </h3>
-										&nbsp;&nbsp;<button class="btn btn-primary" 
-										type="button" id="addFileBtn">Add File</button>
+										&nbsp;&nbsp;
+										<button class="btn btn-primary" type="button" id="addFileBtn">Add File</button>
 									</div>									
 									<div class="card-footer fileInput">
 										<ul class="mailbox-attachments d-flex align-items-stretch clearfix">
-										
+											<c:forEach items="${pds.attachList }" var="attach">
+											<li class="attach-item">
+												<div class="mailbox-attachment-info">
+													<a class="mailbox-attachment-name" name="attachedFile"
+														attach-fileName="${attach.fileName }" attach-no="${attach.ano }"
+														href="getFile.do?pno=${pds.pno }&ano=${attach.ano }" >
+														<i class="fas fa-paperclip"></i>
+														${attach.fileName }&nbsp;&nbsp;
+														<button type="button" style="border:0;outline:0;" class="badge bg-red">X</button>
+													</a>
+												</div>
+											</li>
+											</c:forEach>
 										</ul>
 										<br/>														
 									</div>
@@ -60,6 +74,7 @@
 		</div><!-- end row -->
     </section>
     <!-- /.content -->
-
-
+	
+	<%@ include file="./modify_js.jsp" %>
+	
 </body>

@@ -10,7 +10,7 @@ window.onload = function(){
 	var formObj = $("form[role='form']");
 	$("#modifyBtn").on("click",function(){
 		formObj.attr("action","modifyForm.do");
-		formobj.submit();
+		formObj.submit();
 	});
 	$("#removeBtn").on("click",function(){
 		formObj.attr("action","remove.do");
