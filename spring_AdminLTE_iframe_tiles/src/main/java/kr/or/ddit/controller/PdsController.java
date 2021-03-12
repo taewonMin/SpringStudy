@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import kr.or.ddit.command.PdsModifyCommand;
 import kr.or.ddit.command.PdsRegistCommand;
 import kr.or.ddit.command.SearchCriteria;
@@ -250,7 +249,7 @@ public class PdsController {
 			fileName = fileName.substring(fileName.indexOf("$$") + 2);
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-			headers.add("Content-Diposition", "attachment;filename=\"" + new String(fileName.getBytes("utf-8"), "ISO-8859-1") + "\"");
+			headers.add("Content-Disposition", "attachment;filename=\"" + new String(fileName.getBytes("utf-8"), "ISO-8859-1") + "\"");
 			
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
 		}catch(IOException e) {
