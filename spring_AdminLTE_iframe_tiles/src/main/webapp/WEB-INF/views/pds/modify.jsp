@@ -13,6 +13,11 @@
 				<div class="card card-outline card-primary">
 					<div class="card-header">
 						<h3>자료 수정</h3>
+						<div class="card-tools">
+							<button type="button" class="btn btn-warning" id="modifyBtn">수 정</button>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<button type="button" class="btn" id="cancelBtn">취 소</button>
+						</div>
 					</div><!--end card-header  -->
 					<div class="card-body">
 						<form enctype="multipart/form-data" role="form" method="post" action="modify.do" name="modifyForm">
@@ -64,11 +69,6 @@
 							
 						</form>
 					</div><!--end card-body  -->
-					<div class="card-footer">
-						<button type="button" class="btn btn-warning" id="modifyBtn">수 정</button>
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						<button type="button" class="btn" id="cancelBtn">취 소</button>
-					</div><!--end card-footer  -->
 				</div><!-- end card -->				
 			</div><!-- end col-md-12 -->
 		</div><!-- end row -->

@@ -3,6 +3,8 @@ package kr.or.ddit.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,33 +32,33 @@ public class CommonController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping(value="/common/loginForm",method=RequestMethod.GET)
-	public String loginForm() {
-		String url = "common/loginForm";
-		return url;
-	}
+//	@RequestMapping(value="/common/loginForm",method=RequestMethod.GET)
+//	public String loginForm() {
+//		String url = "common/loginForm";
+//		return url;
+//	}
 	
-	@RequestMapping(value="/common/login",method=RequestMethod.POST)
-	public String login(String id, String pwd, HttpSession session) throws SQLException {
-		String url = "redirect:/index.do";
-		
-		try {
-			memberService.login(id, pwd, session);
-		} catch(NotFoundIDException | InvalidPasswordException e) {
-			url="redirect:/";
-			session.setAttribute("msg", e.getMessage());
-		}
-		
-		return url;
-	}
+//	@RequestMapping(value="/common/login",method=RequestMethod.POST)
+//	public String login(String id, String pwd, HttpSession session) throws SQLException {
+//		String url = "redirect:/index.do";
+//		
+//		try {
+//			memberService.login(id, pwd, session);
+//		} catch(NotFoundIDException | InvalidPasswordException e) {
+//			url="redirect:/";
+//			session.setAttribute("msg", e.getMessage());
+//		}
+//		
+//		return url;
+//	}
 	
-	@RequestMapping(value="/common/logout",method=RequestMethod.GET)
-	public String logout(HttpSession session) {
-		String url="redirect:/";
-		session.invalidate();
-		
-		return url;
-	}
+//	@RequestMapping(value="/common/logout",method=RequestMethod.GET)
+//	public String logout(HttpSession session) {
+//		String url="redirect:/";
+//		session.invalidate();
+//		
+//		return url;
+//	}
 	
 	@RequestMapping(value="/index",method=RequestMethod.GET)
 	public ModelAndView index(@RequestParam(defaultValue="M000000")String mCode, ModelAndView mnv) throws SQLException {
@@ -92,6 +94,15 @@ public class CommonController {
 	@RequestMapping("/home")
 	public String main() {
 		String url = "/common/home.open";
+		return url;
+	}
+	
+	@RequestMapping("/security/home.open")
+	public String accessDenied(HttpServletResponse response) {
+		String url="security/accessDenied";
+		
+		response.setStatus(302);
+		
 		return url;
 	}
 }

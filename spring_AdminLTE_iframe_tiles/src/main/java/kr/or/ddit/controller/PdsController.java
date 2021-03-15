@@ -21,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -96,24 +97,20 @@ public class PdsController {
 	}
 	
 	@RequestMapping(value="/regist",method=RequestMethod.POST,produces="text/plain;charset=utf-8")
-	public void regist(PdsRegistCommand registReq, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String regist(PdsRegistCommand registReq, HttpServletRequest request, Model model) throws Exception {
+		
+		String url="pds/regist_success";
 		
 		List<AttachVO> attachList = saveFile(registReq);
 		
 		PdsVO pds = registReq.toPdsVO();
 		pds.setAttachList(attachList);
-		
+		pds.setTitle((String)request.getAttribute("XSStitle"));
 		service.regist(pds);
 		
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script>");
-		out.println("alert('정상적으로 등록되었습니다.');");
-		out.println("window.opener.location.href='"+request.getContextPath()+"/pds/list';");
-		out.println("window.close();");
-		out.println("</script>");
+		model.addAttribute("attachList", attachList);
 		
-		out.close();
+		return url;
 	}
 	
 	private List<AttachVO> saveFile(PdsRegistCommand registReq) throws Exception {
@@ -166,7 +163,9 @@ public class PdsController {
 	}
 	
 	@RequestMapping(value="/modify",method=RequestMethod.POST)
-	public void modifyPOST(PdsModifyCommand modifyReq, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String modifyPOST(PdsModifyCommand modifyReq, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+		
+		String url = "pds/modify_success";
 		
 		// 삭제된 파일 삭제
 		if(modifyReq.getDeleteFile() != null && modifyReq.getDeleteFile().length > 0) {
@@ -191,19 +190,14 @@ public class PdsController {
 		// PdsVO setting
 		PdsVO pds = modifyReq.toPdsVO();
 		pds.setAttachList(attachList);
-		
+		pds.setTitle((String)request.getAttribute("XSStitle"));
 		// DB에 해당 데이터 추가
 		service.modify(pds);
 		
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script>");
-		out.println("alert('수정되었습니다.');");
-		out.println("location.href='detail?pno="+pds.getPno()+"&from=modify';");
-		out.println("window.opener.location.reload(true);");
-		out.println("</script>");
+		model.addAttribute("attachList",attachList);
+		model.addAttribute("pno",pds.getPno());
 		
-		out.close();
+		return url;
 	}
 	
 	@RequestMapping("/remove")
