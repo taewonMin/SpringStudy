@@ -57,10 +57,10 @@ public class User implements UserDetails {
 	}
 	
 	
-	public MemberVO getMember() {
+	public MemberVO getMemberVO() {
 		return member;
 	}
-	public void setMember(MemberVO member) {
+	public void setMemberVO(MemberVO member) {
 		this.member = member;
 	}
 

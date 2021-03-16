@@ -45,7 +45,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			return result;
 			
 		}else {	// 로그인 실패
-			throw new BadCredentialsException("Bad ID or Password");
+			throw new BadCredentialsException("아이디 혹은 패스워드가 불일치합니다.");
 		}
 	}
 

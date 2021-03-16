@@ -32,11 +32,11 @@ public class CommonController {
 	@Autowired
 	private MemberService memberService;
 	
-//	@RequestMapping(value="/common/loginForm",method=RequestMethod.GET)
-//	public String loginForm() {
-//		String url = "common/loginForm";
-//		return url;
-//	}
+	@RequestMapping(value="/common/loginForm",method=RequestMethod.GET)
+	public String loginForm() {
+		String url = "common/loginForm";
+		return url;
+	}
 	
 //	@RequestMapping(value="/common/login",method=RequestMethod.POST)
 //	public String login(String id, String pwd, HttpSession session) throws SQLException {
@@ -59,6 +59,12 @@ public class CommonController {
 //		
 //		return url;
 //	}
+	
+	@RequestMapping("/common/loginTimeOut")
+	public void loginTimeOut() throws Exception {}
+	
+	@RequestMapping("/common/loginExpired")
+	public void loginExpired() throws Exception {}
 	
 	@RequestMapping(value="/index",method=RequestMethod.GET)
 	public ModelAndView index(@RequestParam(defaultValue="M000000")String mCode, ModelAndView mnv) throws SQLException {
@@ -97,7 +103,7 @@ public class CommonController {
 		return url;
 	}
 	
-	@RequestMapping("/security/home.open")
+	@RequestMapping("/security/accessDenied")
 	public String accessDenied(HttpServletResponse response) {
 		String url="security/accessDenied";
 		
