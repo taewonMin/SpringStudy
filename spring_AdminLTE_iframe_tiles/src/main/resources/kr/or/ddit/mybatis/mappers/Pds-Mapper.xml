@@ -64,6 +64,12 @@
 		where pno=#{pno}
 	</select>
 	
+	<select id="selectPdsByContent" resultType="pds">
+		select *
+		from pds
+		where content like '%'||#{fileName}||'%'
+	</select>
+	
 	<update id="insertPds" parameterType="pds">
 		insert 
 		into 

@@ -15,6 +15,9 @@ public interface BoardService {
 	BoardVO getBoard(int bno)throws SQLException;	
 	BoardVO getBoardForModify(int bno)throws SQLException;
 	
+	// file 찾기
+	BoardVO findBoard(String fileName) throws SQLException;
+	
 	// 등록
 	void regist(BoardVO board)throws SQLException;
 		

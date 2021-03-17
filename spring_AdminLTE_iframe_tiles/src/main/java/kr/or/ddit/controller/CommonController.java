@@ -33,8 +33,11 @@ public class CommonController {
 	private MemberService memberService;
 	
 	@RequestMapping(value="/common/loginForm",method=RequestMethod.GET)
-	public String loginForm() {
+	public String loginForm() throws Exception {
 		String url = "common/loginForm";
+		
+		System.out.println(1/0);
+		
 		return url;
 	}
 	

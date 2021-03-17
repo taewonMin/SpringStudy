@@ -14,6 +14,8 @@ public interface BoardDAO {
 
 	BoardVO selectBoardByBno(int bno) throws SQLException;
 
+	BoardVO selectBoardByContent(String fileName) throws SQLException;
+	
 	void insertBoard(BoardVO board) throws SQLException;
 
 	void updateBoard(BoardVO board) throws SQLException;

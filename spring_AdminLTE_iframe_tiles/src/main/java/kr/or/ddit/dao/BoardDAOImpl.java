@@ -41,6 +41,12 @@ public class BoardDAOImpl implements BoardDAO{
 		BoardVO board=sqlSession.selectOne("Board-Mapper.selectBoardByBno",bno);
 		return board;
 	}
+	
+	@Override
+	public BoardVO selectBoardByContent(String fileName) throws SQLException {
+		BoardVO board = sqlSession.selectOne("Board-Mapper.selectBoardByContent",fileName);
+		return board;
+	}
 
 	@Override
 	public void insertBoard(BoardVO board) throws SQLException {	
@@ -67,4 +73,5 @@ public class BoardDAOImpl implements BoardDAO{
 		int seq_num=sqlSession.selectOne("Board-Mapper.selectBoardSeqNext");
 		return seq_num;
 	}
+
 }

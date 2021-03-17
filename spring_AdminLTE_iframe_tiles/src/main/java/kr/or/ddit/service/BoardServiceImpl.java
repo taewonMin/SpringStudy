@@ -64,6 +64,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public BoardVO findBoard(String fileName) throws SQLException {
+		BoardVO board = boardDAO.selectBoardByContent(fileName);
+		return board;
+	}
+	
+	@Override
 	public void regist(BoardVO board) throws SQLException {
 		int bno=boardDAO.selectBoardSeqNext();
 		
